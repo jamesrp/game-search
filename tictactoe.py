@@ -54,7 +54,12 @@ def ask(board):
     board[i] = 'o'
     return board
 
-depth=3
+import sys
+try:
+    depth = int(sys.argv[1])
+except:
+    print "Usage: python tictactoe.py depth\n\ntry depth=5"
+    sys.exit(0)
 instructions = 'To enter your move, use the coordinates:\n012\n345\n678'
 initial_board='.........'
 command_line_play(initial_board,instructions,children,terminal_value,ask,\

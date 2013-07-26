@@ -96,6 +96,8 @@ def report(board):
 
 def play():
     board = '.........'
+    print "When entering moves, use these positions:"
+    print to_str(range(9))
     while True:
         if report(board) != None:
             break

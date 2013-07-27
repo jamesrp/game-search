@@ -10,16 +10,16 @@ from play import command_line_play
 lines = []
 # Vertical lines
 for i in range(7):
-    for j in range(2):
+    for j in range(3):
         lines.append([(i,x) for x in range(j,j+4)])
 for j in range(6):
     for i in range(4):
         lines.append([(x,j) for x in range(i,i+4)])
 for i in range(4):
-    for j in range(2):
+    for j in range(3):
         lines.append([(i+x,j+x) for x in range(4)])
 for i in range(3,7):
-    for j in range(2):
+    for j in range(3):
         lines.append([(i-x,j+x) for x in range(4)])
 num_lines = float(len(lines))
 
@@ -86,7 +86,6 @@ def children(board):
 negamax = make_negamax(terminal_value, heuristic_value, children)
 
 def ask(board):
-    print to_str(board)
     i = None
     while i == None:
         try:
@@ -94,13 +93,17 @@ def ask(board):
             return insert(board,i-1,'o')
         except:
             i = None
-import sys
-try:
-    depth = int(sys.argv[1])
-except:
-    print "Usage: python connect-four.py depth\n\ntry depth=5"
-    sys.exit(0)
-instructions = 'For Connect Four rules, search online.'
-initial_board=[['_']*6 for loop in range(7)]
-command_line_play(initial_board,instructions,children,terminal_value,ask,\
-                to_str,depth,negamax)
+
+if __name__ == '__main__':
+    import sys
+    try:
+        depth = int(sys.argv[1])
+    except:
+        print "Usage: python connect-four.py depth\n\ntry depth=5"
+        sys.exit(0)
+    instructions = 'For Connect Four rules, search online.'
+    initial_board=[['_']*6 for loop in range(7)]
+    command_line_play(initial_board,instructions,children,terminal_value,ask,\
+                    to_str,depth,negamax)
+
+

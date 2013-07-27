@@ -38,8 +38,12 @@ def terminal_value(board):
 def heuristic_value(board):
     total = 0
     for line in lines:
-        total += sum(1 for (i,j) in line if board[i][j] == 'x')**2
-        total -= sum(1 for (i,j) in line if board[i][j] == 'o')**2
+        a = sum(1 for (i,j) in line if board[i][j] == 'x')
+        b = sum(1 for (i,j) in line if board[i][j] == 'o')
+        if a == 0:
+            total -= b**2
+        elif b == 0:
+            total += a**2
     return total / (16*num_lines)
 
 

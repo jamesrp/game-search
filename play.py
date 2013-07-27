@@ -1,4 +1,4 @@
-
+import random 
 # Assume starting player is computer for now
 
 def command_line_play(initial_board,instructions,children,terminal_value,ask,\
@@ -17,7 +17,15 @@ def command_line_play(initial_board,instructions,children,terminal_value,ask,\
         return 1
     
     def choose(board):
-        return max(children(board),key = lambda c: -negamax(c,depth,-2,2,-1))
+        bestval, bestargs = -2, []
+        for c in children(board):
+            val = -negamax(c,depth,-2,2,-1)
+            if val == bestval:
+                bestargs.append(c)
+            elif val > bestval:
+                bestval = val
+                bestargs = [c]
+        return random.choice(bestargs)
 
     board = initial_board
     print instructions
